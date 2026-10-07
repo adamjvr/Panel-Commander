@@ -1,0 +1,29 @@
+code,semantic,classification,evidence,symbols
+0x10,Brightness,standard MCCS,direct setter immediate,SetBrightness
+0x12,Contrast,standard MCCS,direct setter immediate,SetContrast
+0x14,Color preset / color temperature preset,standard MCCS-ish,direct setter immediate,SetColorPreset
+0x16,Red gain,standard MCCS,direct setter immediate,SetRed
+0x18,Green gain,standard MCCS,direct setter immediate,SetGreen
+0x1A,Blue gain,standard MCCS,direct setter immediate,SetBlue
+0x6C,Red offset / black level red,standard MCCS family,direct setter immediate,SetRedOffset
+0x6E,Green offset / black level green,standard MCCS family,direct setter immediate,SetGreenOffset
+0x70,Blue offset / black level blue,standard MCCS family,direct setter immediate,SetBlueOffset
+0x72,Gamma,standard MCCS family,direct setter immediate,SetGamma
+0x8A,Saturation,standard MCCS,direct setter immediate,SetSaturation
+0x90,Hue,standard MCCS,direct setter immediate,SetHue
+0xE0,Overdrive (OD),ASUS private,direct setter immediate,SetOD
+0xE1,Power saving,ASUS private,direct setter immediate,SetPowerSaving
+0xE2,Screen saver variant,ASUS private,direct setter immediate,SetScreenSaver0xE2
+0xE3,Crosshair,ASUS private,direct setter immediate,SetCrosshair
+0xE4,GamePlus timer; alias InputRange in low-level export,ASUS private multiplexed,direct branch/alias,SetGamePlusTimer; SetInputRange
+0xE5,Dynamic dimming; alias ShadowBoost in low-level export,ASUS private multiplexed,direct branch/alias,SetDynamicDimming; SetShadowBoost
+0xE6,Blue light filter,ASUS private,direct setter immediate,SetBlueLightFilter
+0xE7,Display alignment,ASUS private,direct setter immediate,SetDisplayAlignment
+0xE8,GamePlus position,ASUS private,direct setter immediate,SetGamePlusPosition
+0xEA,FPS counter,ASUS private,direct setter immediate,SetFPSCounter
+0xEC,Reset mode default (value=1),ASUS private,direct body inspection,ResetModeDefault
+0xED,Proximity sensor,ASUS private,direct setter immediate,SetProximitySensor
+0xF9,Screen saver variant,ASUS private,direct setter immediate,SetScreenSaver0xF9
+0x01,DisplayMode wrapper semantic,model/private semantic; do not treat as universal MCCS,direct setter immediate,SetDisplayMode
+0x04,ProArtPreset wrapper semantic,model/private semantic; do not treat as universal MCCS,direct setter immediate,SetProArtPreset
+0x0F,CaliCtrlO ControlModeAndSBDetection,model/private semantic,direct setter immediate,SetCaliCtrlOControlModeAndSBDetection

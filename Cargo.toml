@@ -1,0 +1,24 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/panel-commander-core",
+    "crates/panel-commander-asus",
+    "crates/panel-commander-linux",
+    "crates/panel-commander-macos",
+    "apps/panelctl",
+    "apps/panel-commanderd",
+]
+default-members = [
+    "crates/panel-commander-core",
+    "crates/panel-commander-asus",
+    "crates/panel-commander-linux",
+    "apps/panelctl",
+    "apps/panel-commanderd",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "GPL-3.0-or-later"
+rust-version = "1.75"
+authors = ["Panel Commander contributors"]

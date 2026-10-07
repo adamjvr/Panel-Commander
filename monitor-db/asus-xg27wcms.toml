@@ -1,0 +1,89 @@
+# Hardware-verified model definition seed.
+# Physical verification: 2026-10-07, XG27WCMS over native DisplayPort/AMDGPU DP-AUX.
+vendor = "AUS"
+product_code = 0x275E
+model = "XG27WCMS"
+status = "live-read-characterized"
+mccs_version = "2.2"
+
+[transport]
+linux_verified = "DRM DisplayPort connector with DP-AUX-backed i2c-dev fallback"
+verified_ddc_address = 0x37
+verified_edid_address = 0x50
+
+[standard_vcp]
+brightness = 0x10
+contrast = 0x12
+color_preset = 0x14
+red_gain = 0x16
+green_gain = 0x18
+blue_gain = 0x1A
+input_source = 0x60
+audio_volume = 0x62
+gamma = 0x72
+saturation = 0x8A
+power_mode = 0xD6
+mccs_version = 0xDF
+
+[asus_private]
+overdrive = 0xE0
+power_saving = 0xE1
+screen_saver_e2 = 0xE2
+crosshair = 0xE3
+private_e4 = 0xE4
+private_e5 = 0xE5
+blue_light_filter = 0xE6
+display_alignment = 0xE7
+gameplus_position = 0xE8
+fps_counter = 0xEA
+reset_mode_default = 0xEC
+
+[advertised_values]
+color_preset = [0x05, 0x06, 0x08, 0x0B]
+input_source = [0x11, 0x1A, 0x0F]
+gamma = [0x50, 0x64, 0x78, 0x8C, 0xA0]
+vcp_86 = [0x01, 0x02, 0x0B, 0x0D, 0x0F]
+vcp_8d = [0x01, 0x02]
+vcp_cc = [0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0C, 0x0D, 0x11, 0x12, 0x14, 0x1A, 0x1E, 0x1F, 0x23, 0x24, 0x30, 0x31]
+power_mode = [0x01, 0x05]
+vcp_dc = [0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A]
+vcp_dd = [0x00, 0x01]
+power_saving = [0x00, 0x01]
+screen_saver_e2 = [0x00, 0x01, 0x02, 0x03]
+crosshair = [0x00, 0x02, 0x07, 0x09, 0x0A, 0x0B, 0x0C]
+private_e4 = [0x00, 0x01, 0x02, 0x03, 0x04, 0x05]
+private_e5 = [0x00, 0x01, 0x02, 0x03, 0x04]
+display_alignment = [0x00, 0x01]
+gameplus_position = [0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08]
+fps_counter = [0x00, 0x01, 0x02]
+reset_mode_default = [0x01, 0xFF]
+vcp_ee = [0x00, 0x01, 0x02, 0x03, 0x04, 0x05]
+vcp_fc = [0x004F]
+vcp_fd = [0x0007]
+
+[verified_read_state]
+brightness = "65/100"
+contrast = "80/100"
+color_preset = "5/11"
+red_gain = "100/100"
+green_gain = "100/100"
+blue_gain = "100/100"
+input_source = "15/20"
+audio_volume = "50/100"
+saturation = "50/100"
+power_mode = "1/4"
+mccs_version_numeric = "514"
+overdrive = "10/20"
+power_saving = "0/1"
+screen_saver_e2 = "2/3"
+crosshair = "0/11"
+private_e4 = "0/5"
+private_e5 = "0/255"
+blue_light_filter = "0/4"
+display_alignment = "0/1"
+fps_counter = "0/2"
+
+[notes]
+e4 = "Multiplexed in ASUS binaries: GamePlus timer / InputRange alias. Do not write until value semantics are correlated against OSD state."
+e5 = "Multiplexed in ASUS binaries: Dynamic Dimming / ShadowBoost alias. Do not write until value semantics are correlated against OSD state."
+writes = "All ASUS-private writes remain locked in Panel Commander until hardware write semantics are verified."

@@ -1,0 +1,17 @@
+[package]
+name = "panel-commanderd"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+panel-commander-core = { path = "../../crates/panel-commander-core" }
+panel-commander-asus = { path = "../../crates/panel-commander-asus" }
+
+[target.'cfg(target_os = "linux")'.dependencies]
+panel-commander-linux = { path = "../../crates/panel-commander-linux" }
+
+[[bin]]
+name = "panel-commanderd"
+path = "src/main.rs"

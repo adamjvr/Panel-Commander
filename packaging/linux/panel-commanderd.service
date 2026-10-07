@@ -1,0 +1,12 @@
+[Unit]
+Description=Panel Commander monitor service
+After=graphical-session-pre.target
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/panel-commanderd
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=default.target

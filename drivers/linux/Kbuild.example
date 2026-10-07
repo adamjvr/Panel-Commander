@@ -1,0 +1,2 @@
+# Integrate into a Rust-enabled Linux kernel source tree:
+obj-m += panel_commander.o
