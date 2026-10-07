@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.1.0-dev — OSD correlation R4b qualification hotfix
+
+- Shipped `snapshot.rs` in the exact rustfmt form required by the qualified Rust 1.97 toolchain.
+- Promoted read-only `panelctl capabilities`, `probe`, and `snapshot` hardware checks to explicit evidence gates.
+- Added `GATES.txt` with per-step result codes to every evidence archive.
+- Evidence generation now leaves exactly one timestamped ZIP in `~/Downloads`; SHA-256 is printed instead of creating a sidecar file.
+
+## 0.1.0-dev — R4a qualification hotfix
+
+- Fixed the R4 snapshot diff Clippy `type_complexity` failure by replacing the tuple fingerprint with a named structure.
+- Added `scripts/build_test.sh`, a cumulative regression/diagnostic harness that always emits one timestamped evidence ZIP in `~/Downloads`.
+- Added automated Git/toolchain/DRM/I2C/DP-AUX diagnostics and optional read-only hardware probe/capabilities/snapshot capture.
+- Established the policy that all future Panel Commander passes must ship and pass the evidence harness.
+
+## 0.1.0-dev — XG27WCMS OSD correlation R4
+
+- Added `panelctl snapshot <connector> <output.json>` for read-only, reproducible hardware-state capture.
+- Added `panelctl diff <before.json> <after.json>` for offline VCP state correlation.
+- Snapshot JSON records monitor identity, selected transport/method, raw capabilities, MCCS/model identity, all advertised VCP results, enum values, and per-code errors.
+- Diff refuses to correlate different monitor identities and ignores non-state metadata such as capture timestamps.
+- Added regression tests for snapshot change detection.
+- Kept all ASUS-private writes locked while semantic characterization is in progress.
+
 ## 0.1.0-dev — XG27WCMS live characterization R3
 
 - Promoted the physical XG27WCMS capability string to hardware evidence.

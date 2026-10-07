@@ -1,3 +1,5 @@
+mod snapshot;
+
 use panel_commander_asus::{known_probe_codes, semantic_name, AsusModel};
 use panel_commander_core::{Capabilities, DdcTransport, Error, Result, VcpCode};
 
@@ -20,6 +22,10 @@ fn run() -> Result<()> {
         return Ok(());
     }
 
+    if args[0] == "diff" {
+        return snapshot::cmd_diff(&args[1..]);
+    }
+
     #[cfg(not(target_os = "linux"))]
     {
         return Err(Error::Unsupported(
@@ -34,6 +40,7 @@ fn run() -> Result<()> {
         "get" => cmd_get(&args[1..]),
         "set" => cmd_set(&args[1..]),
         "scan" => cmd_scan(&args[1..]),
+        "snapshot" => snapshot::cmd_snapshot(&args[1..]),
         "capabilities" | "caps" => cmd_capabilities(&args[1..]),
         other => Err(Error::InvalidArgument(format!(
             "unknown command {other:?}; run panelctl --help"
@@ -53,11 +60,15 @@ Usage:
   panelctl set <connector> <hex-vcp> <value> --write
   panelctl scan <connector> [--all-codes]
   panelctl capabilities <connector>
+  panelctl snapshot <connector> <output.json>
+  panelctl diff <before.json> <after.json>
 
 Examples:
   panelctl list
   panelctl probe card1-DP-1
   panelctl get card1-DP-1 0x10
+  panelctl snapshot card1-DP-2 before.json
+  panelctl diff before.json after.json
   panelctl set card1-DP-1 0x10 50 --write
 
 Writes are deliberately blocked unless --write is present.

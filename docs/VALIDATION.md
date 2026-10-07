@@ -1,27 +1,24 @@
-# Validation performed in the build environment
+# Validation
 
-Date: 2026-09-19
-
-The source tree was structurally validated before packaging.
-
-- All 7 `Cargo.toml` manifests parse successfully as TOML.
-- DDC/CI Get Brightness request computes to:
-  `51 82 01 10 AC` (outer checksum seed `6E`).
-- DDC/CI Set Brightness=50 computes to:
-  `51 84 03 10 00 32 9A`.
-- A standard Brightness 50/100 reply computes reply checksum `F2` using
-  the DDC/CI virtual-host checksum seed `50`.
-- The Rust unit tests include these protocol invariants plus EDID and capability-parser tests.
-- Private E4/E5 writes are blocked by the CLI.
-
-## Toolchain limitation of this execution environment
-
-This container does not contain `rustc`, `cargo`, or `rustfmt`, and outbound shell networking is
-disabled, so I could not truthfully claim an in-container Rust compile. The repository therefore
-includes GitHub CI and `scripts/check.sh`; the first command to run on Rosie/macOS is:
+Panel Commander passes are qualified on the target workstation with:
 
 ```bash
-./scripts/check.sh
+sudo -v
+./scripts/build_test.sh
 ```
 
-Any compile issue discovered there should be treated as an M0 bootstrap bug, not worked around.
+The harness is intentionally non-mutating. It checks formatting rather than rewriting source and records each gate in `GATES.txt`.
+
+Required regression gates:
+
+- `git diff --check`
+- `cargo fmt --all -- --check`
+- `cargo test --workspace`
+- `cargo clippy --workspace --all-targets -- -D warnings`
+- `cargo build --workspace`
+- `panelctl list`
+- read-only target-monitor `probe`
+- read-only target-monitor `capabilities`
+- read-only target-monitor JSON `snapshot`
+
+Every run packages one timestamped `Panel-Commander-BuildTest-*.zip` in `~/Downloads`, on success or failure. The archive contains `RESULT.txt`, `GATES.txt`, individual logs, Git/toolchain provenance, DRM/I2C/DP-AUX topology, capabilities evidence, and the JSON hardware snapshot. The ZIP SHA-256 and final result code are printed to the terminal; no loose diagnostic logs or checksum sidecar are created.

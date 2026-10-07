@@ -8,6 +8,8 @@ rust-version.workspace = true
 [dependencies]
 panel-commander-core = { path = "../../crates/panel-commander-core" }
 panel-commander-asus = { path = "../../crates/panel-commander-asus" }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
 
 [target.'cfg(target_os = "linux")'.dependencies]
 panel-commander-linux = { path = "../../crates/panel-commander-linux" }
